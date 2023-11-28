@@ -9,14 +9,14 @@ class Product:
     description = ""
     price = 0.0
     createdDate = ""
-    
-    def init(self, data):
-        self.product_id = data["product_id"]
-        self.name = data["name"]
-        self.description = data["description"],
-        self.price = data["price"]
-        self.createdDate = datetime.now().strftime("%m/%d/%YT%H:%M:%S")
 
+    @staticmethod
+    def initial(pid, name, description, price):
+        product = Product()
+        product.init(pid, name, description, price)
+        return product
+
+    
     def init(self, pid, name, description, price):
         self.product_id = pid
         self.name = name

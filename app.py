@@ -1,26 +1,32 @@
-__author__ = 'phemananth'
+__author__ = 'Vignesh Kumar'
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, make_response, request
+from flask_httpauth import HTTPTokenAuth
+
 
  
 from Products import ProductList
 from ProductObj import Product
+from Auth_Middleware import token_required
+
 
 app = Flask(__name__)
+auth = HTTPTokenAuth(scheme='Bearer')
 
-@app.route("/")
-def IamWorking():
-    return "I'm Okay!"
+tokens = ["vigesh","hello"]
+
+@app.route('/')
+def index():
+    return "Hello, {}!".format(auth.current_user())
 
 
 products = ProductList()
 
 @app.route("/product", methods=['POST'])
+@token_required
 def addProducts():
-	print("Add Products")
 	data = request.json
-	product = Product()
-	product.init(data)
+	product = Product.initial(data["product_id"],data["name"],data["description"],data["price"])
 	products.addProduct(product)
 	return {"status":200,"description":"Product is created"}
 
