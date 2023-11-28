@@ -19,9 +19,8 @@ products = ProductList()
 def addProducts():
 	print("Add Products")
 	data = request.json
-	print(data["product_id"])
 	product = Product()
-	product.init(data["product_id"],data["name"],data["description"],data["price"])
+	product.init(data)
 	products.addProduct(product)
 	return {"status":200,"description":"Product is created"}
 

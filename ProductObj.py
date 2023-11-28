@@ -10,6 +10,13 @@ class Product:
     price = 0.0
     createdDate = ""
     
+    def init(self, data):
+        self.product_id = data["product_id"]
+        self.name = data["name"]
+        self.description = data["description"],
+        self.price = data["price"]
+        self.createdDate = datetime.now().strftime("%m/%d/%YT%H:%M:%S")
+
     def init(self, pid, name, description, price):
         self.product_id = pid
         self.name = name
